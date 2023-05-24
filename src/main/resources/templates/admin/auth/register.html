@@ -19,37 +19,36 @@
 <body class="hold-transition login-page">
 <div class="login-box">
     <div class="login-logo">
-        <a href="#"><b>Admin</b>LTE</a>
+        <a href="#"><b>SI</b>DBM</a>
     </div>
     <!-- /.login-logo -->
     <div class="login-box-body">
-        <p class="login-box-msg">Registration</p>
+        <p class="login-box-msg">Novo cadastro</p>
 
         <div th:if="${param.error}">
             <div class="alert alert-danger">
-                There was some error in registration.
+                Houve um erro no cadastro.
             </div>
         </div>
 
         <div th:if="${param.username}">
             <div class="alert alert-danger">
-                There is already a user registered with the username/email provided.
+                Email já cadastrado.
             </div>
         </div>
 
         <div th:if="${param.success}">
-            <div class="alert alert-info">You've successfully registered
-                to our awesome app!</div>
+            <div class="alert alert-info">Cadastro realizado com sucesso.</div>
         </div>
 
         <form th:action="@{/register}" th:object="${userRegistrationDto}" method="post">
             <div class="form-group has-feedback">
-                <input type="text" class="form-control" th:field="*{firstName}" required  placeholder="First name">
+                <input type="text" class="form-control" th:field="*{firstName}" required  placeholder="Primeiro nome">
                 <span class="glyphicon glyphicon-user form-control-feedback"></span>
             </div>
 
             <div class="form-group has-feedback">
-                <input type="text" class="form-control" th:field="*{lastName}" required  placeholder="Last name">
+                <input type="text" class="form-control" th:field="*{lastName}" required  placeholder="Ultimo nome">
                 <span class="glyphicon glyphicon-user form-control-feedback"></span>
             </div>
 
@@ -58,7 +57,7 @@
                 <span class="glyphicon glyphicon-leaf form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
-                <input type="password" class="form-control" th:field="*{password}" required  placeholder="Password">
+                <input type="password" class="form-control" th:field="*{password}" required  placeholder="Senha">
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>
             <div class="row">
@@ -66,12 +65,12 @@
                 </div>
                 <!-- /.col -->
                 <div class="col-xs-4">
-                    <button type="submit" class="btn btn-primary btn-block btn-flat">Register</button>
+                    <button type="submit" class="btn btn-primary btn-block btn-flat">Cadastrar</button>
                 </div>
                 <!-- /.col -->
             </div>
         </form>
-        <a th:href="@{/login}" class="text-center">Already member login here</a>
+        <a th:href="@{/login}" class="text-center">Já possui cadastro? Autentique-se aqui.</a>
     </div>
     <!-- /.login-box-body -->
 </div>

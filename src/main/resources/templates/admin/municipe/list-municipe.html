@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorate="layout">
+<head>
+    <title>Munícipes</title>
+</head>
+<body>
+<section layout:fragment="header">
+    <h1>
+        Lista de munícipes
+        <small>Administração</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Munícipes</li>
+    </ol>
+</section>
+<div layout:fragment="content">
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">Lista de munícipes</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div class="box-footer center">
+                        <a th:href="@{/municipe/add}">
+                            <button type="button" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> Novo cadastro</button>
+                        </a>
+							<div class="form-group input-group pull-left col-xs-3">
+							<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+								<input id="searchInput" type="text" class="search form-control"
+									aria-describedb="searchIcon" placeholder="Busca">
+							</div>	
+                        <!--<form th:action="@{/product/list}" method="get">
+                            <input type="search" th:value="${param.search}" name='search' placeholder="search">
+                            <button type="submit">Search</button>
+                        </form>-->
+                    </div>
+                    <!--<div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">-->                    
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <table id="example1" class="table table-bordered table-striped dataTable" role="grid"
+                                       aria-describedby="example1_info">
+                                    <thead class="thead">
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>CPF</th>
+                                        <th>Nome</th>
+                                        <th>Data de nascimento</th>
+                                        <th>Sexo</th>                                        
+                                        <th>Ações</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="municipe : ${listMunicipes}">
+                                        <td th:text="${municipe.codigo}"></td>
+                                        <td th:text="${municipe.cpf}"></td>
+                                        <td th:text="${municipe.nome}"></td>
+                                        <td th:text="${municipe.dataNascimento}"></td>
+                                        <td th:text="${municipe.sexo}"></td>                                        
+                                        <td>
+                                            <a href="#" class="btn btn-primary btn-xs purple editView" title="Edit" th:href="@{'/municipe/edit/' + ${municipe.codigo}}"><i class="fa fa-edit"></i> Edit</a>
+                                            <a href="#" class="btn btn-danger btn-xs purple deleteView" title="Delete" th:href="@{'/municipe/delete/' + ${municipe.codigo}}"><i class="fa fa-trash-o"></i> Delete</a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <div class="pagination pull-right">
+								    <button class="btn btn-primary" id="prevPage">Anterior</button>
+								    <span id="currentPage"> </span>
+								    <button class="btn btn-primary" id="nextPage">Próxima</button>
+							  </div>
+                            </div>
+
+                        </div>
+                    <!--</div>-->
+
+                    <!--<div class="dataTables_paginate paging_bootstrap">
+                        <ul th:if="${listProducts.totalPages > 0}" th:each="pageNumber : ${pageNumbers}"  class="pagination">
+                            <li th:class="${pageNumber==listProducts.number + 1} ? active">
+                                <a th:href="@{/product/list(search=${param.search},size=${listProducts.size}, page=${pageNumber})}"
+                                   th:text=${pageNumber}>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>-->
+
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </div>
+        <!-- /.col -->
+    </div>
+</div>
+
+
+<th:block layout:fragment="script">
+<script src="/dist/js/pages/sidbm_custom.js"></script>
+</th:block>
+</body>
+
+</html>

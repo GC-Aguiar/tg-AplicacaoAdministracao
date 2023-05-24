@@ -3,15 +3,15 @@
       xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
       layout:decorate="layout">
 <head>
-    <title>Dashboard</title>
+    <title>Erro 500 : Erro interno no servidor</title>
 </head>
 <body>
 <section layout:fragment="header">
     <h1>
-        Error 500 : Internal Server Error
+        Erro 500 : Erro interno no servidor
     </h1>
     <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Error</a></li>
+        <li><a href="#"><i class="fa fa-dashboard"></i> Erro</a></li>
         <li class="active">500</li>
     </ol>
 </section>
@@ -22,24 +22,24 @@
         <h2 class="headline text-red">500</h2>
 
         <div class="error-content">
-            <h3><i class="fa fa-warning text-red"></i> Oops! Something went wrong.</h3>
+            <h3><i class="fa fa-warning text-red"></i> Eita! Alguma coisa deu errado.</h3>
 
             <p>
-                We will work on fixing that right away.
-                Meanwhile, you may <a href="../../index.html">return to dashboard</a> or try using the search form.
+               Estamos trabalhando para corrigir isso agora mesmo.                
             </p>
-
-            <form class="search-form">
-                <div class="input-group">
-                    <input type="text" name="search" class="form-control" placeholder="Search">
-
-                    <div class="input-group-btn">
-                        <button type="submit" name="submit" class="btn btn-danger btn-flat"><i class="fa fa-search"></i>
-                        </button>
-                    </div>
-                </div>
-                <!-- /.input-group -->
-            </form>
+			 <!-- /.error-page 
+	            <form class="search-form">
+	                <div class="input-group">
+	                    <input type="text" name="search" class="form-control" placeholder="Search">
+	
+	                    <div class="input-group-btn">
+	                        <button type="submit" name="submit" class="btn btn-danger btn-flat"><i class="fa fa-search"></i>
+	                        </button>
+	                    </div>
+	                </div>
+	                <!-- /.input-group 
+	            </form>
+             /.error-page -->
         </div>
     </div>
     <!-- /.error-page -->
