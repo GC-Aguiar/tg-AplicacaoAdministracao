@@ -58,13 +58,13 @@
                                     <tbody>
                                     <tr th:each="municipe : ${listMunicipes}">
                                         <td th:text="${municipe.codigo}"></td>
-                                        <td th:text="${municipe.cpf}"></td>
+                                        <td class="cpf-columns" th:text="${municipe.cpf}"></td>
                                         <td th:text="${municipe.nome}"></td>
                                         <td th:text="${municipe.dataNascimento}"></td>
                                         <td th:text="${municipe.sexo}"></td>                                        
                                         <td>
-                                            <a href="#" class="btn btn-primary btn-xs purple editView" title="Edit" th:href="@{'/municipe/edit/' + ${municipe.codigo}}"><i class="fa fa-edit"></i> Edit</a>
-                                            <a href="#" class="btn btn-danger btn-xs purple deleteView" title="Delete" th:href="@{'/municipe/delete/' + ${municipe.codigo}}"><i class="fa fa-trash-o"></i> Delete</a>
+                                            <a href="#" class="btn btn-primary btn-xs purple editView" title="Edit" th:href="@{'/municipe/edit/' + ${municipe.codigo}}"><i class="fa fa-edit"></i> Editar</a>
+                                            <a href="#" class="btn btn-danger btn-xs purple deleteView" title="Delete" th:href="@{'/municipe/delete/' + ${municipe.codigo}}"><i class="fa fa-trash-o"></i> Excluir</a>
                                         </td>
                                     </tr>
                                     </tbody>
