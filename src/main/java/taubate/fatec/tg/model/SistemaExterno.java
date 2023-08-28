@@ -16,6 +16,7 @@ public class SistemaExterno {
 	private String status;
 	private String email;
 	private String preposto;
+	private Integer contagemAcessos;
 	private String dataCadastro;
 	private Integer usuarioCadastro;
 	private String dataAlteracao;
@@ -58,6 +59,13 @@ public class SistemaExterno {
 	public void setPreposto(String preposto) {
 		this.preposto = preposto;
 	}
+	
+	public Integer getContagemAcessos() {
+		return contagemAcessos;
+	}
+	public void setContagemAcessos(Integer contagemAcessos) {
+		this.contagemAcessos = contagemAcessos;
+	}
 	public String getDataCadastro() {
 		return dataCadastro;
 	}
@@ -82,15 +90,15 @@ public class SistemaExterno {
 	public void setUsuarioAlteracao(Integer usuarioAlteracao) {
 		this.usuarioAlteracao = usuarioAlteracao;
 	}
-	
 	@Override
 	public String toString() {
 		return "SistemaExterno [codigo=" + codigo + ", descricao=" + descricao + ", empCodigo=" + empCodigo
-				+ ", status=" + status + ", email=" + email + ", preposto=" + preposto + ", dataCadastro="
-				+ dataCadastro + ", usuarioCadastro=" + usuarioCadastro + ", dataAlteracao=" + dataAlteracao
-				+ ", usuarioAlteracao=" + usuarioAlteracao + "]";
+				+ ", status=" + status + ", email=" + email + ", preposto=" + preposto + ", contagemAcessos="
+				+ contagemAcessos + ", dataCadastro=" + dataCadastro + ", usuarioCadastro=" + usuarioCadastro
+				+ ", dataAlteracao=" + dataAlteracao + ", usuarioAlteracao=" + usuarioAlteracao + "]";
 	}
 	
+
 	
 
 }

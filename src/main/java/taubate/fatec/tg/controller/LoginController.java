@@ -34,7 +34,10 @@ public class LoginController {
         UserRegistrationDto userRegistrationDto = new UserRegistrationDto();
         model.addAttribute("userRegistrationDto", userRegistrationDto);
 
-        return "admin/auth/register";
+        //return "admin/auth/register";
+        
+        
+        return "admin/usuarioAdministracao/add-edit-usuario-administracao";
     }
     @PostMapping("/register")
     public String registerUserAccount(@Valid @ModelAttribute("userRegistrationDto") UserRegistrationDto userRegistrationDto, BindingResult result, Model model) {

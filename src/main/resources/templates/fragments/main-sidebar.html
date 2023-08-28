@@ -16,8 +16,7 @@
         <li class="active treeview">
             <a href="#">
                 <i class="fa fa-th"></i> <span>Administração</span>
-                <span class="pull-right-container">
-          <i class="fa fa-angle-left pull-right"></i>
+                <span class="pull-right-container">         
         </span>
             </a>
             <ul class="treeview-menu">
@@ -27,11 +26,11 @@
                 <li><a th:href="@{/municipe/list}"><i class="fa fa-circle-o"></i> Munícipes</a></li>
                 <li><a th:href="@{/empresa/list}"><i class="fa fa-circle-o"></i> Empresas</a></li>
                 <li><a th:href="@{/sistemaExterno/list}"><i class="fa fa-circle-o"></i> Sistemas</a></li>
-                <li><a th:href="@{/lgpd/list}"><i class="fa fa-circle-o"></i> LGPD</a></li>
-                <li><a th:href="@{/usuario/list}"><i class="fa fa-circle-o"></i> Usuários</a></li>
+                <li><a th:href="@{/lgpd/list}"><i class="fa fa-circle-o"></i> LGPD</a></li>                
                 <li><a th:href="@{/bairro/list}"><i class="fa fa-circle-o"></i> Bairros</a></li>
                 <li><a th:href="@{/cidade/list}"><i class="fa fa-circle-o"></i> Cidades</a></li>
-                <li><a th:href="@{/relatorio/list}"><i class="fa fa-circle-o"></i> Relatórios</a></li>
+                <li><a th:href="@{/usuario/list}"><i class="fa fa-circle-o"></i> Usuários - SIDBM</a></li>
+                <li><a th:href="@{/register}"><i class="fa fa-circle-o"></i> Usuários - Administração</a></li>
                 <li><a th:href="@{/dashboard/view}"><i class="fa fa-circle-o"></i> Dashboard</a></li>
                 <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}"><i class="fa fa-circle-o"></i> Sair</a></li>
             </ul>

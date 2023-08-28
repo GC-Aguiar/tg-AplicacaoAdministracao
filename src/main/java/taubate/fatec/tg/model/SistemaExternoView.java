@@ -9,15 +9,14 @@ public class SistemaExternoView {
 	private String status;
 	private String email;
 	private String preposto;
+	private Integer contagemAcessos;
 	
 	public SistemaExternoView() {
 		super();
 	}
 
-
-
 	public SistemaExternoView(Integer codigo, String descricao, Integer empCodigo, String empDescricao, String status,
-			String email, String preposto) {
+			String email, String preposto, Integer contagemAcessos) {
 		super();
 		this.codigo = codigo;
 		this.descricao = descricao;
@@ -26,7 +25,12 @@ public class SistemaExternoView {
 		this.status = status;
 		this.email = email;
 		this.preposto = preposto;
+		this.contagemAcessos = contagemAcessos;
 	}
+
+
+
+
 
 
 
@@ -85,13 +89,29 @@ public class SistemaExternoView {
 	public void setPreposto(String preposto) {
 		this.preposto = preposto;
 	}
+	
+
+	public Integer getContagemAcessos() {
+		return contagemAcessos;
+	}
+
+
+
+	public void setContagemAcessos(Integer contagemAcessos) {
+		this.contagemAcessos = contagemAcessos;
+	}
+
+
 
 	@Override
 	public String toString() {
 		return "SistemaExternoView [codigo=" + codigo + ", descricao=" + descricao + ", empCodigo=" + empCodigo
 				+ ", empDescricao=" + empDescricao + ", status=" + status + ", email=" + email + ", preposto="
-				+ preposto + "]";
+				+ preposto + ", contagemAcessos=" + contagemAcessos + "]";
 	}
+
+
+
 	
 	
 

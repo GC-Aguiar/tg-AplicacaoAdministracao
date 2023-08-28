@@ -16,118 +16,122 @@ import org.springframework.web.reactive.function.client.WebClient;
 import extra.FluxToList;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import taubate.fatec.tg.model.Empresa;
 import taubate.fatec.tg.model.SistemaExterno;
-import taubate.fatec.tg.model.SistemaExternoView;
-import taubate.fatec.tg.repository.SistemaExternoRepository;
+import taubate.fatec.tg.model.Usuario;
+import taubate.fatec.tg.model.UsuarioView;
+import taubate.fatec.tg.repository.UsuarioRepository;
 
 @Service
-public class SistemaExternoService {
+public class UsuarioService {
 
 	@Autowired
-	private SistemaExternoRepository sistemaExternoRepository;
+	private UsuarioRepository usuarioRepository;
 	@Autowired
 	AutenticacaoService autenticacaoService;
 
-	public List<SistemaExternoView> listAllSistemasExternos() {
+	public List<UsuarioView> listAllUsuarios() {
 
-		WebClient webClient = WebClient.builder().baseUrl("http://localhost:8080/sistemas")
+		WebClient webClient = WebClient.builder().baseUrl("http://localhost:8080/usuarios")
 				.defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
 				.defaultHeader(HttpHeaders.AUTHORIZATION, autenticacaoService.autenticacaoApi()).build();
 
-		Flux<SistemaExterno> fluxSistemasExternos = webClient.get().retrieve().bodyToFlux(SistemaExterno.class);
+		Flux<Usuario> fluxUsuarios = webClient.get().retrieve().bodyToFlux(Usuario.class);
 
-		WebClient webClientEmpresa = WebClient.builder().baseUrl("http://localhost:8080/empresas")
+		WebClient webClientSistemaExterno = WebClient.builder().baseUrl("http://localhost:8080/sistemas")
 				.defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
 				.defaultHeader(HttpHeaders.AUTHORIZATION, autenticacaoService.autenticacaoApi()).build();
 
-		Flux<Empresa> fluxEmpresas = webClientEmpresa.get().retrieve().bodyToFlux(Empresa.class);
+		Flux<SistemaExterno> fluxSistemasExternos = webClientSistemaExterno.get().retrieve().bodyToFlux(SistemaExterno.class);
 
 
 		// Converte flux to lista
+		List<Usuario> listaUsuarios = FluxToList
+				.converterFluxParaListUsuarios(fluxUsuarios);
+		
+				
 		List<SistemaExterno> listaSistemasExternos = FluxToList
 				.converterFluxParaListSistemasExternos(fluxSistemasExternos);
-		
-		List<Empresa> listaEmpresas = FluxToList.converterFluxParaListEmpresas(fluxEmpresas);
 
-		List<SistemaExternoView> listaSistemasExternosView = new ArrayList<>();
+		List<UsuarioView> listaUsuariosView = new ArrayList<>();
 
-		Map<Integer, String> empresasMap = new HashMap<>();
+		Map<Integer, String> sistemaExternosMap = new HashMap<>();
 
-		for (Empresa empresa : listaEmpresas) {
-			empresasMap.put(empresa.getCodigo(), empresa.getDescricao());
+		for (SistemaExterno sistemaExterno : listaSistemasExternos) {
+			sistemaExternosMap.put(sistemaExterno.getCodigo(), sistemaExterno.getDescricao());
 		}
-		for (SistemaExterno sistema : listaSistemasExternos) {
-			Integer codigoEmpresa = sistema.getEmpCodigo();
-			String descricaoEmpresa = empresasMap.get(codigoEmpresa);
-			if (descricaoEmpresa != null) {
-				listaSistemasExternosView
-						.add(new SistemaExternoView(sistema.getCodigo(), sistema.getDescricao(), sistema.getEmpCodigo(),
-								descricaoEmpresa, sistema.getStatus(), sistema.getEmail(), sistema.getPreposto(), sistema.getContagemAcessos()));
+		for (Usuario usuario : listaUsuarios) {
+			Integer codigoSistemaExterno = usuario.getCodigoSistema();
+			String descricaoSistemaExterno = sistemaExternosMap.get(codigoSistemaExterno);
+			String descricaoPerfil = "Admin";
+			if (descricaoSistemaExterno != null) {
+				listaUsuariosView
+						.add(new UsuarioView(usuario.getCodigo(), usuario.getNome(), usuario.getLogin(),
+								usuario.getSenha(), usuario.getStatus(),usuario.getCodigoPerfil(), descricaoPerfil,
+								usuario.getCodigoSistema(), descricaoSistemaExterno));
 			}
 		}
-//		for (SistemaExternoView sistemaComDescricao : listaSistemasExternosView) {
+//		for (UsuarioView sistemaComDescricao : listaSistemasExternosView) {
 //			System.out.println(sistemaComDescricao);
 //		}
 
-		return listaSistemasExternosView;
+		return listaUsuariosView;
 	}
 	
-	public SistemaExterno getSistemaExternoById(Integer id){
+	public Usuario getUsuarioById(Integer id){
 		
 	    WebClient webClient = WebClient.builder()
-	            .baseUrl("http://localhost:8080/sistemas/" + id)
+	            .baseUrl("http://localhost:8080/usuarios/" + id)
 	            .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
 	            .defaultHeader(HttpHeaders.AUTHORIZATION, autenticacaoService.autenticacaoApi())
 	            .build();
 
-	    SistemaExterno sistemaExterno = webClient.get()                
+	    Usuario usuario = webClient.get()                
 	            .retrieve()
-	            .bodyToMono(SistemaExterno.class)
+	            .bodyToMono(Usuario.class)
 	            .block();
 	    
-//		WebClient webClientEmpresa = WebClient.builder().baseUrl("http://localhost:8080/empresas")
+//		WebClient webClientSistemaExterno = WebClient.builder().baseUrl("http://localhost:8080/sistemaExternos")
 //				.defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
 //				.defaultHeader(HttpHeaders.AUTHORIZATION, autenticacaoService.autenticacaoApi()).build();
 //
-//		Mono<Empresa> monoEmpresa = webClientEmpresa.get()
+//		Mono<SistemaExterno> monoSistemaExterno = webClientSistemaExterno.get()
 //				.retrieve()
-//				.bodyToMono(Empresa.class);
+//				.bodyToMono(SistemaExterno.class);
 //		
-//		Mono<SistemaExternoView> monoSistemaExternoView = monoSistemaExterno.zipWith(monoEmpresa)
+//		Mono<UsuarioView> monoUsuarioView = monoUsuario.zipWith(monoSistemaExterno)
 //		        .map(tuple -> {
-//		            SistemaExterno sistemaExterno = tuple.getT1();
-//		            Empresa empresa = tuple.getT2();
+//		            Usuario usuario = tuple.getT1();
+//		            SistemaExterno sistemaExterno = tuple.getT2();
 //
-//		            // Criar um TerceiroObjeto combinando os campos de sistemaExterno e empresa
-//		            SistemaExternoView sistemaExternoView = new SistemaExternoView();
-//		            sistemaExternoView.setCodigo(sistemaExterno.getCodigo());
-//		            sistemaExternoView.setDescricao(sistemaExterno.getDescricao());
-//		            sistemaExternoView.setEmpCodigo(sistemaExterno.getEmpCodigo());
-//		            sistemaExternoView.setEmpDescricao(empresa.getDescricao());
-//		            sistemaExternoView.setStatus(sistemaExterno.getStatus());
-//		            sistemaExternoView.setEmail(sistemaExterno.getEmail());
-//		            sistemaExternoView.setPreposto(sistemaExterno.getPreposto());
+//		            // Criar um TerceiroObjeto combinando os campos de usuario e sistemaExterno
+//		            UsuarioView usuarioView = new UsuarioView();
+//		            usuarioView.setCodigo(usuario.getCodigo());
+//		            usuarioView.setDescricao(usuario.getDescricao());
+//		            usuarioView.setEmpCodigo(usuario.getEmpCodigo());
+//		            usuarioView.setEmpDescricao(sistemaExterno.getDescricao());
+//		            usuarioView.setStatus(usuario.getStatus());
+//		            usuarioView.setEmail(usuario.getEmail());
+//		            usuarioView.setPreposto(usuario.getPreposto());
 //
-//		            return sistemaExternoView;
+//		            return usuarioView;
 //		        });	
 		
-		return sistemaExterno;
+		return usuario;
 	}
 
-	public void save(SistemaExterno sistemaExterno) {
+	public void save(Usuario usuario) {
 
 		System.out.println("Inserindo munícipe no service");
-		System.out.println(sistemaExterno);
+		System.out.println(usuario);
 					
 	    WebClient webClient = WebClient.builder()
-	              .baseUrl("http://localhost:8080/sistemas/")
+	              .baseUrl("http://localhost:8080/usuarios/")
 	              .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
 	              .defaultHeader(HttpHeaders.AUTHORIZATION, autenticacaoService.autenticacaoApi())
 	              .build();      
 	       
 	    Mono<ClientResponse> responseMono = webClient.post()                
-					.body(BodyInserters.fromValue(sistemaExterno))
+					.body(BodyInserters.fromValue(usuario))
 					.exchange();        
 
 		ClientResponse response = responseMono.block();
@@ -136,19 +140,19 @@ public class SistemaExternoService {
 
 	  }    
 	  
-	  public void updateSistemaExternoById(SistemaExterno sistemaExterno, Integer id) {
+	  public void updateUsuarioById(Usuario usuario, Integer id) {
 	  	
 			System.out.println("Atualizando munícipe no service");
-			System.out.println(sistemaExterno);
+			System.out.println(usuario);
 					
 	      WebClient webClient = WebClient.builder()
-	              .baseUrl("http://localhost:8080/sistemas/" + id)
+	              .baseUrl("http://localhost:8080/usuarios/" + id)
 	              .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
 	              .defaultHeader(HttpHeaders.AUTHORIZATION, autenticacaoService.autenticacaoApi())
 	              .build();      
 	       
 	      Mono<ClientResponse> responseMono = webClient.put()                
-					.body(BodyInserters.fromValue(sistemaExterno))
+					.body(BodyInserters.fromValue(usuario))
 					.exchange();        
 
 		ClientResponse response = responseMono.block();
@@ -156,10 +160,10 @@ public class SistemaExternoService {
 		System.out.println("Código de retorno HTTP: " + statusCode);
 	  }
 	  
-	  public void deleteSistemaExternoById(Integer id) {
+	  public void deleteUsuarioById(Integer id) {
 	  	
 	      WebClient webClient = WebClient.builder()
-	              .baseUrl("http://localhost:8080/sistemas/" + id)
+	              .baseUrl("http://localhost:8080/usuarios/" + id)
 	              .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
 	              .defaultHeader(HttpHeaders.AUTHORIZATION, autenticacaoService.autenticacaoApi())
 	              .build();

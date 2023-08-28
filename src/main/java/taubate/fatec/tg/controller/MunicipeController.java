@@ -1,11 +1,20 @@
 package taubate.fatec.tg.controller;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -16,108 +25,86 @@ import taubate.fatec.tg.service.MunicipeService;
 @RequestMapping("/municipe")
 public class MunicipeController {
 
-    @Autowired
-    private MunicipeService municipeService;
+	@Autowired
+	private MunicipeService municipeService;
 
-    private String add_edit_template="/admin/municipe/add-edit-municipe";
-    private String list_template="/admin/municipe/list-municipe";
-    private String list_redirect="redirect:/admin/municipe/list-municipe";
+	private String add_edit_template = "/admin/municipe/add-edit-municipe";
+	private String list_template = "/admin/municipe/list-municipe";
+	private String list_redirect = "redirect:/admin/municipe/list-municipe";
 
+	@GetMapping("/add")
+	public ModelAndView inserirMunicipe() {
 
-    @GetMapping("/add")
-    public String addProduct(){
-    	//public String addProduct(Product product, Model model){
-        /*
-    	model.addAttribute("product", product);
-        List<ProductType> productTypes = productTypeService.listAll();
-        model.addAttribute("productTypes",productTypes);
-*/
-        return add_edit_template;
-    }
+		Municipe municipe = new Municipe();
 
-/*
-    @GetMapping("/edit/{id}")
-    public String editProduct(@PathVariable("id") long id, Model model){
-        Product product = productService.get(id);
-        model.addAttribute("product", product);
+		System.out.println(municipe);
 
-        List<ProductType> productTypes = productTypeService.listAll();
-        model.addAttribute("productTypes",productTypes);
+		ModelAndView modelAndView = new ModelAndView("/admin/municipe/add-edit-municipe");
+		modelAndView.addObject("municipe", municipe);
 
-        return add_edit_template;
-    }
+		return modelAndView;
+	}
 
-    @PostMapping("/save")
-    public String saveProduct(@Valid @ModelAttribute("product") Product product, BindingResult result, Model model){
-        model.addAttribute("product", product);
-        List<ProductType> productTypes = productTypeService.listAll();
-        model.addAttribute("productTypes",productTypes);
+	@GetMapping("/edit/{id}")
+	public ModelAndView editarMunicipe(@PathVariable("id") Integer id) {
 
-        if(result.hasErrors()){
-            return add_edit_template;
-        }
+		Municipe municipe = municipeService.getMunicipeById(id);
+		
+		System.out.println(municipe);
+		
+		ModelAndView modelAndView = new ModelAndView("/admin/municipe/add-edit-municipe");
+		modelAndView.addObject("municipe", municipe);
 
-        productService.save(product);
-        return list_redirect;
-    }
+		return modelAndView;
+	}
 
+	@PostMapping("/save")
+	public String gravarMunicipe(@Valid @ModelAttribute("municipe") Municipe municipe, BindingResult result,
+			Model model) {
 
+		// Obter a data atual
+		LocalDate dataAtual = LocalDate.now();
 
-    @GetMapping("/delete/{id}")
-    public String deleteProduct(@PathVariable("id") long id, Model model) {
-        productService.delete(id);
+		// Formatar a data no formato "AAAA-MM-DD"
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		municipe.setDataAlteracao(dataAtual.format(formatter));
+		municipe.setDataCadastro(dataAtual.format(formatter));// Alterar
+		municipe.setUsuarioAlteracao(1); // alterar para pegar o usuário logado
+		municipe.setUsuarioCadastro(1); // alterar para pegar o usuário de cadastro
 
-        return list_redirect;
-    }
-*/
-    @GetMapping("/list")
-    public ModelAndView listarMunicipes() {
-        /*
-    	List<ProductType> productTypes = productTypeService.listAll();
-        model.addAttribute("productTypes",productTypes);
-*/
-        List<Municipe> listMunicipes = (List<Municipe>) municipeService.listAllMunicipes();
-        //System.out.println(listMunicipes);
-        ModelAndView modelAndView = new ModelAndView("/admin/municipe/list-municipe");
-        modelAndView.addObject("listMunicipes", listMunicipes);
-       
-    	
-    	
-        //Chamar o método do service para receber os dados da API. Colocar esses dados em uma list.
-    	
-    	//System.out.println(municipeService.listAllMunicipes());
-        
-        //Adicionar a list de municipes em um Model and View
-        
-        //Retornar a Model and View
+		model.addAttribute("municipe", municipe);
+		System.out.println("Inicio da atualizacao no /save");
 
-        return modelAndView;
-    }
-    /*@GetMapping("/list")
-    public String listProduct(Model model
-            ,@RequestParam("search") Optional<String> search
-            ,@RequestParam("page") Optional<Integer> page
-            ,@RequestParam("size") Optional<Integer> size)
-    {
+		if (municipe.getCodigo() == null) {
+			System.out.println("Atualizando munícipe");
+			System.out.println(municipe);
+			municipeService.save(municipe);
+		} else {
+			System.out.println("Atualizando munícipe");
+			System.out.println(municipe);
+			municipeService.update(municipe, municipe.getCodigo());
+		}
+		return "redirect:/municipe/list";
 
-        int currentPage = page.orElse(1);
-        int pageSize = size.orElse(5);
-        String criteria = search.orElse("");
+	}
 
-        List<ProductType> productTypes = productTypeService.listAll();
-        model.addAttribute("productTypes",productTypes);
+	@GetMapping("/delete/{id}")
+	public String excluirMunicipe(@PathVariable("id") Integer id) {
 
-        Page<Product> listProducts = productService.findPaginated(criteria, PageRequest.of(currentPage - 1, pageSize));
-        model.addAttribute("listProducts", listProducts);
+		municipeService.delete(id);
 
-        int totalPages = listProducts.getTotalPages();
-        if (totalPages > 0) {
-            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
-                    .boxed()
-                    .collect(Collectors.toList());
-            model.addAttribute("pageNumbers", pageNumbers);
-        }
+		return "redirect:/municipe/list";
 
-        return list_template;
-    }*/
+	}
+
+	@GetMapping("/list")
+	public ModelAndView listarMunicipes() {
+
+		List<Municipe> listMunicipes = (List<Municipe>) municipeService.listAllMunicipes();
+		// System.out.println(listMunicipes);
+		ModelAndView modelAndView = new ModelAndView("/admin/municipe/list-municipe");
+		modelAndView.addObject("listMunicipes", listMunicipes);
+
+		return modelAndView;
+	}
 }

@@ -18,9 +18,9 @@ public class AutenticacaoService {
     String token; 
     
     public String autenticacaoApi() {
-    	System.out.println("**********************");
-    	System.out.println("Inicio da autenticação");
-    	System.out.println("**********************");
+//    	System.out.println("**********************");
+//    	System.out.println("Inicio da autenticação");
+//    	System.out.println("**********************");
     	
         WebClient webClient = WebClient.builder()
                 .baseUrl(urlAPI)

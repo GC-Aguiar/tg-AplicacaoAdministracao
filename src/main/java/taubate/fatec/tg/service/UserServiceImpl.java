@@ -1,5 +1,10 @@
 package taubate.fatec.tg.service;
 
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -13,10 +18,6 @@ import taubate.fatec.tg.model.User;
 import taubate.fatec.tg.repository.IRoleRepository;
 import taubate.fatec.tg.repository.IUserRepository;
 import taubate.fatec.tg.web.dto.UserRegistrationDto;
-
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements IUserService{
@@ -67,6 +68,11 @@ public class UserServiceImpl implements IUserService{
 
     private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles){
         return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
+    }
+    
+    public List<User> findAllUsers(){
+    	return userRepository.findAll();
+    	
     }
 
 }

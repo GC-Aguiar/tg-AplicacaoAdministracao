@@ -14,9 +14,6 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import taubate.fatec.tg.service.IUserService;
 
-/**
- * Created by noman.
- */
 @Configuration
 @EnableWebSecurity
 public class CustomWebSecurityConfigurer extends WebSecurityConfigurerAdapter {

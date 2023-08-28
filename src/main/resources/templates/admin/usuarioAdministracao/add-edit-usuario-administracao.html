@@ -3,16 +3,16 @@
 	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
 	layout:decorate="layout">
 <head>
-<title>Detalhes do Empresa</title>
+<title>Detalhes do Usuário</title>
 </head>
 <body>
 	<section layout:fragment="header">
 		<h1>
-			Detalhes do Empresa <small>Administração</small>
+			Detalhes da Usuário <small>Administração</small>
 		</h1>
 		<ol class="breadcrumb">
 			<li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
-			<li class="active">Detalhes do Empresa</li>
+			<li class="active">Detalhes do Usuário</li>
 		</ol>
 	</section>
 	<div layout:fragment="content">
@@ -21,64 +21,49 @@
 				<!-- Horizontal Form -->
 				<div class="box box-info">
 					<div class="box-header with-border">
-						<h3 class="box-title">Detalhes do Empresa</h3>
+						<h3 class="box-title">Detalhes do Usuário</h3>
 					</div>
 					<!-- /.box-header -->
 					<!-- form start -->
-					<form th:action="@{/empresa/save/}" th:object="${empresa}"
+					<form th:action="@{/register}" th:object="${userRegistrationDto}"
 						method="post" class="form-horizontal">
 						<div class="box-body">
 
-
-							<div class="form-group">
-								<label class="col-sm-2 control-label">Código</label>
-								<div class="col-sm-4">
-									<input type="text" class="form-control" readonly="readonly"
-										th:field="*{codigo}" placeholder="Código do Empresa">
+							<div class="form-group has-feedback">
+								<label class="col-sm-2 control-label">Primeiro nome</label>
+								<div class="col-sm-6">
+									<input type="text" class="form-control" th:field="*{firstName}"
+										required placeholder="Primeiro nome"> <span
+										class="glyphicon glyphicon-user form-control-feedback"></span>
 								</div>
 							</div>
 
-
-							<div class="form-group">
-								<label class="col-sm-2 control-label">Descrição</label>
-								<div class="col-sm-4">
-									<input type="text" class="form-control" th:field="*{descricao}">
-									<p class="text-red" th:if="${#fields.hasErrors('descricao')}"
-										th:errors="descricao"></p>
+							<div class="form-group has-feedback">
+								<label class="col-sm-2 control-label">Ultimo nome</label>
+								<div class="col-sm-6">
+									<input type="text" class="form-control" th:field="*{lastName}"
+										required placeholder="Ultimo nome"> <span
+										class="glyphicon glyphicon-user form-control-feedback"></span>
 								</div>
 							</div>
 
-
-
-							<div class="form-group">
-								<label class="col-sm-2 control-label">CNPJ</label>
-								<div class="col-sm-4">
-									<input type="text" class="form-control" id="cnpj"
-										th:field="*{cnpj}" />
-									<p class="text-red" th:if="${#fields.hasErrors('cnpj')}"
-										th:errors="cnpj"></p>
+							<div class="form-group has-feedback">
+								<label class="col-sm-2 control-label">Email</label>
+								<div class="col-sm-6">
+									<input type="email" class="form-control" th:field="*{userName}"
+										required placeholder="email"> <span
+										class="glyphicon glyphicon-leaf form-control-feedback"></span>
 								</div>
 							</div>
 
-							<div class="form-group">
-								<label class="col-sm-2 control-label">E-mail</label>
-								<div class="col-sm-4">
-									<input type="text" class="form-control" th:field="*{email}" />
-									<p class="text-red" th:if="${#fields.hasErrors('email')}"
-										th:errors="*{email}"></p>
+							<div class="form-group has-feedback">
+								<label class="col-sm-2 control-label">Senha</label>
+								<div class="col-sm-6">
+									<input type="password" class="form-control"
+										th:field="*{password}" required placeholder="Senha"> <span
+										class="glyphicon glyphicon-lock form-control-feedback"></span>
 								</div>
 							</div>
-
-							<div class="form-group">
-								<label class="col-sm-2 control-label">Preposto</label>
-								<div class="col-sm-4">
-									<input type="text" class="form-control" id="preposto"
-										name="preposto" th:field="*{preposto}" />
-									<p class="text-red" th:if="${#fields.hasErrors('preposto')}"
-										th:errors="*{preposto}"></p>
-								</div>
-							</div>
-
 						</div>
 						<!-- Modal de confirmação -->
 						<div class="modal fade" id="modalConfirmacao" tabindex="-1"
@@ -99,9 +84,9 @@
 									<div class="modal-footer">
 										<button type="button" class="btn btn-secondary"
 											data-dismiss="modal">Continuar com o cadastro</button>
-										<a th:href="@{/empresa/list}">
+										<a th:href="@{/}">
 											<button type="button" class="btn btn-danger">Voltar
-												para a lista</button>
+												para o início</button>
 										</a>
 									</div>
 								</div>
@@ -120,7 +105,8 @@
 								<i class="fa fa-save"></i> Salvar
 							</button>
 						</div>
-						<!-- /.box-footer -->
+						<!-- /.col -->
+
 					</form>
 				</div>
 				<!-- /.box -->

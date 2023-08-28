@@ -27,8 +27,8 @@
                 <!-- /.box-header -->
                 <div class="box-body">
                     <div class="box-footer center">
-                        <a th:href="@{/municipe/add}">
-                            <button type="button" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> Novo cadastro</button>
+                        <a th:href="@{/municipe/list}">
+                            <button type="button" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> Incluir novo munícipe</button>
                         </a>
 							<div class="form-group input-group pull-left col-xs-3">
 							<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
@@ -61,7 +61,7 @@
                                         <td th:text="${municipe.nome}"></td>
                                         <td th:text="${municipe.solicitaExclusao}"></td>                                         
                                         <td>
-                                            <a href="#" class="btn btn-primary btn-xs purple editView" title="Edit" th:href="@{'/municipe/edit/' + ${municipe.codigo}}"><i class="fa fa-edit"></i> Editar</a>                                            
+                                            <a href="#" class="btn btn-primary btn-xs purple editView" title="Edit" th:href="@{'/lgpd/edit/' + ${municipe.codigo}}"><i class="fa fa-edit"></i> Editar</a>                                            
                                         </td>
                                     </tr>
                                     </tbody>

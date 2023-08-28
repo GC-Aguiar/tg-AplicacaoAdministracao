@@ -1,19 +1,27 @@
 package taubate.fatec.tg.model;
 
+import java.sql.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-public class Cidade {
+public class Uf {
 	
 	@Id
-	private Integer codigo;
+	private Integer codigo;	
 	private String descricao;
-	private Integer ufCodigo;
-	private String dataCadastro;
+	private String regiao;
+	private Date dataCadastro;
 	private Integer usuarioCadastro;
-	private String dataAlteracao;
+	private Date dataAlteracao;
 	private Integer usuarioAlteracao;
+	@Override
+	public String toString() {
+		return "Uf [codigo=" + codigo + ", descricao=" + descricao + ", regiao=" + regiao + ", dataCadastro="
+				+ dataCadastro + ", usuarioCadastro=" + usuarioCadastro + ", dataAlteracao=" + dataAlteracao
+				+ ", usuarioAlteracao=" + usuarioAlteracao + "]";
+	}
 	public Integer getCodigo() {
 		return codigo;
 	}
@@ -26,16 +34,16 @@ public class Cidade {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	public Integer getUfCodigo() {
-		return ufCodigo;
+	public String getRegiao() {
+		return regiao;
 	}
-	public void setUfCodigo(Integer ufCodigo) {
-		this.ufCodigo = ufCodigo;
+	public void setRegiao(String regiao) {
+		this.regiao = regiao;
 	}
-	public String getDataCadastro() {
+	public Date getDataCadastro() {
 		return dataCadastro;
 	}
-	public void setDataCadastro(String dataCadastro) {
+	public void setDataCadastro(Date dataCadastro) {
 		this.dataCadastro = dataCadastro;
 	}
 	public Integer getUsuarioCadastro() {
@@ -44,10 +52,10 @@ public class Cidade {
 	public void setUsuarioCadastro(Integer usuarioCadastro) {
 		this.usuarioCadastro = usuarioCadastro;
 	}
-	public String getDataAlteracao() {
+	public Date getDataAlteracao() {
 		return dataAlteracao;
 	}
-	public void setDataAlteracao(String dataAlteracao) {
+	public void setDataAlteracao(Date dataAlteracao) {
 		this.dataAlteracao = dataAlteracao;
 	}
 	public Integer getUsuarioAlteracao() {
@@ -56,13 +64,7 @@ public class Cidade {
 	public void setUsuarioAlteracao(Integer usuarioAlteracao) {
 		this.usuarioAlteracao = usuarioAlteracao;
 	}
-	@Override
-	public String toString() {
-		return "Cidade [codigo=" + codigo + ", descricao=" + descricao + ", ufCodigo=" + ufCodigo + ", dataCadastro="
-				+ dataCadastro + ", usuarioCadastro=" + usuarioCadastro + ", dataAlteracao=" + dataAlteracao
-				+ ", usuarioAlteracao=" + usuarioAlteracao + "]";
-	}
-	
-	
 
+	
+	
 }

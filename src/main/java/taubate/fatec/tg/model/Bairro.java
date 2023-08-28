@@ -13,10 +13,11 @@ public class Bairro {
 	private Integer codigo;
 	private String descricao;	
 	private String regiao;
-	private Date dataCadastro;
+	private String dataCadastro;
 	private Integer usuarioCadastro;
-	private Date dataAlteracao;
+	private String dataAlteracao;
 	private Integer usuarioAlteracao;
+	
 	public Integer getCodigo() {
 		return codigo;
 	}
@@ -35,10 +36,10 @@ public class Bairro {
 	public void setRegiao(String regiao) {
 		this.regiao = regiao;
 	}
-	public Date getDataCadastro() {
+	public String getDataCadastro() {
 		return dataCadastro;
 	}
-	public void setDataCadastro(Date dataCadastro) {
+	public void setDataCadastro(String dataCadastro) {
 		this.dataCadastro = dataCadastro;
 	}
 	public Integer getUsuarioCadastro() {
@@ -47,10 +48,10 @@ public class Bairro {
 	public void setUsuarioCadastro(Integer usuarioCadastro) {
 		this.usuarioCadastro = usuarioCadastro;
 	}
-	public Date getDataAlteracao() {
+	public String getDataAlteracao() {
 		return dataAlteracao;
 	}
-	public void setDataAlteracao(Date dataAlteracao) {
+	public void setDataAlteracao(String dataAlteracao) {
 		this.dataAlteracao = dataAlteracao;
 	}
 	public Integer getUsuarioAlteracao() {
@@ -58,6 +59,12 @@ public class Bairro {
 	}
 	public void setUsuarioAlteracao(Integer usuarioAlteracao) {
 		this.usuarioAlteracao = usuarioAlteracao;
+	}
+	@Override
+	public String toString() {
+		return "Bairro [codigo=" + codigo + ", descricao=" + descricao + ", regiao=" + regiao + ", dataCadastro="
+				+ dataCadastro + ", usuarioCadastro=" + usuarioCadastro + ", dataAlteracao=" + dataAlteracao
+				+ ", usuarioAlteracao=" + usuarioAlteracao + "]";
 	}
 	
 }

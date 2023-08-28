@@ -3,16 +3,16 @@
 	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
 	layout:decorate="layout">
 <head>
-<title>Munícipes</title>
+<title>Cidades</title>
 </head>
 <body>
 	<section layout:fragment="header">
 		<h1>
-			Lista de munícipes <small>Administração</small>
+			Lista de cidades <small>Administração</small>
 		</h1>
 		<ol class="breadcrumb">
 			<li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
-			<li class="active">Munícipes</li>
+			<li class="active">Cidades</li>
 		</ol>
 	</section>
 	<div layout:fragment="content">
@@ -21,22 +21,22 @@
 			<div class="col-xs-12">
 				<div class="box">
 					<div class="box-header">
-						<h3 class="box-title">Lista de munícipes</h3>
+						<h3 class="box-title">Lista de cidades</h3>
 					</div>
 					<!-- /.box-header -->
 					<div class="box-body">
 						<div class="box-footer center">
-							<a th:href="@{/municipe/add}">
+							<a th:href="@{/cidade/add}">
 								<button type="button" class="btn btn-primary pull-right">
 									<i class="fa fa-plus"></i> Novo cadastro
 								</button>
 							</a>
 							<div class="form-group input-group pull-left col-xs-3">
-								<span class="input-group-addon"><i
-									class="glyphicon glyphicon-search"></i></span> <input id="searchInput"
-									type="text" class="search form-control"
+							<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+								<input id="searchInput" type="text" class="search form-control"
 									aria-describedb="searchIcon" placeholder="Busca">
 							</div>
+
 							<!--<form th:action="@{/product/list}" method="get">
                             <input type="search" th:value="${param.search}" name='search' placeholder="search">
                             <button type="submit">Search</button>
@@ -51,28 +51,24 @@
 									<thead class="thead">
 										<tr>
 											<th>ID</th>
-											<th>CPF</th>
-											<th>Nome</th>
-											<th>Data de nascimento</th>
-											<th>Sexo</th>
+											<th>Descrição</th>
+											<th>Estado</th>
 											<th>Ações</th>
 										</tr>
 									</thead>
 									<tbody>
-										<tr th:each="municipe : ${listMunicipes}">
-											<td th:text="${municipe.codigo}"></td>
-											<td class="cpf-columns" th:text="${municipe.cpf}"></td>
-											<td th:text="${municipe.nome}"></td>
-											<td th:text="${municipe.dataNascimento}"></td>
-											<td th:text="${municipe.sexo}"></td>
-											<td><a href="#" id="btnEdit"
+										<tr th:each="cidade : ${listCidades}">
+											<td th:text="${cidade.codigo}"></td>
+											<td th:text="${cidade.descricao}"></td>
+											<td th:text="${cidade.ufDescricao}"></td>
+											<td><a href="#"
 												class="btn btn-primary btn-xs purple editView" title="Edit"
-												th:href="@{'/municipe/edit/' + ${municipe.codigo}}"><i
-													class="fa fa-edit"></i> Editar</a> <a href="#" id="btnDelete"
+												th:href="@{'/cidade/edit/' + ${cidade.codigo}}"><i
+													class="fa fa-edit"></i> Editar</a> <a href="#"
 												class="btn btn-danger btn-xs purple deleteView"
 												title="Delete"
-												th:href="@{'/municipe/delete/' + ${municipe.codigo}}"><i
-													class="fa fa-trash-o"></i> Excluir</a></td>
+												th:href="@{'/cidade/delete/' + ${cidade.codigo}}"><i
+													class="fa fa-trash-o"></i> Apagar</a></td>
 										</tr>
 									</tbody>
 								</table>
@@ -84,42 +80,6 @@
 							</div>
 
 						</div>
-						<!-- 
-						<div class="modal fade" id="modalConfirmacao" tabindex="-1"
-							role="dialog" aria-labelledby="modalConfirmacaoLabel"
-							aria-hidden="true">
-							<div class="modal-dialog" role="document">
-								<div class="modal-content">
-									<div class="modal-header">
-										<h5 class="modal-title" id="modalConfirmacaoLabel">Confirme
-											a exclusão</h5>
-										<button type="button" class="close" data-dismiss="modal"
-											aria-label="Fechar">
-											<span aria-hidden="true">&times;</span>
-										</button>
-									</div>
-									<div class="modal-body">Tem certeza que deseja excluir
-										este registro?</div>
-									<div class="modal-footer">
-										<button type="button" class="btn btn-secondary"
-											data-dismiss="modal">Cancelar</button>
-										<button type="button" id="botaoConfirmar"
-											class="btn btn-primary" href="#">Confirmar exclusão</button>
-									</div>
-								</div>
-							</div>
-						</div> -->
-						<div class="modal fade bd-example-modal-sm" name="modalAviso"
-							tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
-							aria-hidden="true">
-							<div class="modal-dialog modal-sm">
-								<div class="modal-content">
-									<p id="textoAviso"></p>
-								</div>
-							</div>
-						</div>
-
-
 						<!--</div>-->
 
 						<!--<div class="dataTables_paginate paging_bootstrap">
@@ -140,8 +100,6 @@
 			<!-- /.col -->
 		</div>
 	</div>
-
-
 
 
 	<th:block layout:fragment="script">

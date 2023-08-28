@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
 <head>
-    <meta charset="utf-8" />
+    <meta charset="iso-8859-1" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title layout:title-pattern="$DECORATOR_TITLE - $CONTENT_TITLE">SIDBM</title>
     <!-- Tell the browser to be responsive to screen width -->
@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="/extra/css/font-awesome.min.css" />
     <!-- Ionicons -->
     <link rel="stylesheet" href="/extra/css/ionicons.min.css" />
+    <!-- CSS SIDBM -->
+    <link rel="stylesheet" href="/extra/css/sidbm-custom.css" />
     <!-- Theme style -->
     <link rel="stylesheet" href="/dist/css/AdminLTE.min.css" />
     <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -68,9 +70,9 @@
     <!-- /.content-wrapper -->
     <footer class="main-footer">
         <div class="pull-right hidden-xs">
-            <b>Versão</b> 0.0.1
+            <b>Versao</b> 0.0.1
         </div>
-        <strong>Guilherme Aguiar</strong> - FATEC Taubaté.
+        <strong>Guilherme Aguiar</strong> - FATEC Taubate.
     </footer>
 
     <!-- Control Sidebar -->
@@ -84,6 +86,7 @@
 <script src="/plugins/jQuery/jQuery-2.2.0.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
 <script src="/extra/js/1.11.4_jquery-ui.min.js"></script>
+<script src="/plugins/jQueryUI/jquery.mask.js"/></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
   $.widget.bridge('uibutton', $.ui.button);
@@ -109,6 +112,7 @@
 <script type="text/javascript" src="/plugins/custom-datatable/datatable.js"></script>
 <script type="text/javascript" src="/plugins/custom-datatable/datatables.min.js"></script>
 <script type="text/javascript" src="/plugins/custom-datatable/DT_bootstrap.js"></script>
+
 
 
 <th:block layout:fragment="script"></th:block>

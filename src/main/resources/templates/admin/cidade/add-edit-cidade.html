@@ -3,16 +3,16 @@
 	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
 	layout:decorate="layout">
 <head>
-<title>Detalhes do Empresa</title>
+<title>Detalhes do Sistema Externo</title>
 </head>
 <body>
 	<section layout:fragment="header">
 		<h1>
-			Detalhes do Empresa <small>Administração</small>
+			Detalhes da Cidade <small>Administração</small>
 		</h1>
 		<ol class="breadcrumb">
 			<li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
-			<li class="active">Detalhes do Empresa</li>
+			<li class="active">Detalhes da Cidade</li>
 		</ol>
 	</section>
 	<div layout:fragment="content">
@@ -21,63 +21,44 @@
 				<!-- Horizontal Form -->
 				<div class="box box-info">
 					<div class="box-header with-border">
-						<h3 class="box-title">Detalhes do Empresa</h3>
+						<h3 class="box-title">Detalhes da Cidade</h3>
 					</div>
 					<!-- /.box-header -->
 					<!-- form start -->
-					<form th:action="@{/empresa/save/}" th:object="${empresa}"
+					<form th:action="@{/cidade/save/}" th:object="${form}"
 						method="post" class="form-horizontal">
 						<div class="box-body">
-
-
 							<div class="form-group">
 								<label class="col-sm-2 control-label">Código</label>
 								<div class="col-sm-4">
-									<input type="text" class="form-control" readonly="readonly"
-										th:field="*{codigo}" placeholder="Código do Empresa">
+									<input type="text" class="form-control" name="codigo" 
+										th:value="${cidade.codigo}" placeholder="Código do Sistema Externo">
 								</div>
 							</div>
-
 
 							<div class="form-group">
 								<label class="col-sm-2 control-label">Descrição</label>
 								<div class="col-sm-4">
-									<input type="text" class="form-control" th:field="*{descricao}">
-									<p class="text-red" th:if="${#fields.hasErrors('descricao')}"
-										th:errors="descricao"></p>
-								</div>
-							</div>
-
-
-
-							<div class="form-group">
-								<label class="col-sm-2 control-label">CNPJ</label>
-								<div class="col-sm-4">
-									<input type="text" class="form-control" id="cnpj"
-										th:field="*{cnpj}" />
-									<p class="text-red" th:if="${#fields.hasErrors('cnpj')}"
-										th:errors="cnpj"></p>
+									<input type="text" class="form-control" name="descricao" 
+										th:value="${cidade.descricao}">
+									
 								</div>
 							</div>
 
 							<div class="form-group">
-								<label class="col-sm-2 control-label">E-mail</label>
+								<label class="col-sm-2 control-label">UF</label>
 								<div class="col-sm-4">
-									<input type="text" class="form-control" th:field="*{email}" />
-									<p class="text-red" th:if="${#fields.hasErrors('email')}"
-										th:errors="*{email}"></p>
+									<select class="form-control" id="ufDescricao"
+										name="ufCodigo">
+										<option value="">Selecione a UF</option>
+										<option 
+											th:each="uf : ${ufs}"
+											th:value="${uf.codigo}" 
+											th:text="${uf.descricao}"
+											th:selected="${uf.codigo == cidade.ufCodigo}"></option>
+									</select>
 								</div>
-							</div>
-
-							<div class="form-group">
-								<label class="col-sm-2 control-label">Preposto</label>
-								<div class="col-sm-4">
-									<input type="text" class="form-control" id="preposto"
-										name="preposto" th:field="*{preposto}" />
-									<p class="text-red" th:if="${#fields.hasErrors('preposto')}"
-										th:errors="*{preposto}"></p>
-								</div>
-							</div>
+							</div>							
 
 						</div>
 						<!-- Modal de confirmação -->
@@ -87,8 +68,7 @@
 							<div class="modal-dialog" role="document">
 								<div class="modal-content">
 									<div class="modal-header">
-										<h5 class="modal-title" id="modalConfirmacaoLabel">Confirme
-											sua ação</h5>
+										<h5 class="modal-title" id="modalConfirmacaoLabel">Confirme sua ação</h5>
 										<button type="button" class="close" data-dismiss="modal"
 											aria-label="Fechar">
 											<span aria-hidden="true">&times;</span>
@@ -99,9 +79,8 @@
 									<div class="modal-footer">
 										<button type="button" class="btn btn-secondary"
 											data-dismiss="modal">Continuar com o cadastro</button>
-										<a th:href="@{/empresa/list}">
-											<button type="button" class="btn btn-danger">Voltar
-												para a lista</button>
+										<a th:href="@{/cidade/list}">
+											<button type="button" class="btn btn-danger">Voltar para a lista</button>
 										</a>
 									</div>
 								</div>

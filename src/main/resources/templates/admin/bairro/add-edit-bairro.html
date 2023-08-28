@@ -3,16 +3,16 @@
 	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
 	layout:decorate="layout">
 <head>
-<title>Detalhes do Empresa</title>
+<title>Detalhes do Bairro</title>
 </head>
 <body>
 	<section layout:fragment="header">
 		<h1>
-			Detalhes do Empresa <small>Administração</small>
+			Detalhes do Bairro <small>Administração</small>
 		</h1>
 		<ol class="breadcrumb">
 			<li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
-			<li class="active">Detalhes do Empresa</li>
+			<li class="active">Detalhes do Bairro</li>
 		</ol>
 	</section>
 	<div layout:fragment="content">
@@ -21,23 +21,21 @@
 				<!-- Horizontal Form -->
 				<div class="box box-info">
 					<div class="box-header with-border">
-						<h3 class="box-title">Detalhes do Empresa</h3>
+						<h3 class="box-title">Detalhes do Bairro</h3>
 					</div>
 					<!-- /.box-header -->
 					<!-- form start -->
-					<form th:action="@{/empresa/save/}" th:object="${empresa}"
+					<form th:action="@{/bairro/save/}" th:object="${bairro}"
 						method="post" class="form-horizontal">
 						<div class="box-body">
-
 
 							<div class="form-group">
 								<label class="col-sm-2 control-label">Código</label>
 								<div class="col-sm-4">
 									<input type="text" class="form-control" readonly="readonly"
-										th:field="*{codigo}" placeholder="Código do Empresa">
+										th:field="*{codigo}" placeholder="Código do Bairro">
 								</div>
 							</div>
-
 
 							<div class="form-group">
 								<label class="col-sm-2 control-label">Descrição</label>
@@ -48,36 +46,22 @@
 								</div>
 							</div>
 
-
-
 							<div class="form-group">
-								<label class="col-sm-2 control-label">CNPJ</label>
+								<label class="col-sm-2 control-label">Região</label>
 								<div class="col-sm-4">
-									<input type="text" class="form-control" id="cnpj"
-										th:field="*{cnpj}" />
-									<p class="text-red" th:if="${#fields.hasErrors('cnpj')}"
-										th:errors="cnpj"></p>
+									<select class="form-control" id="regiao" name="regiao">
+										<option value="Central" th:selected="${regiao == 'Central'}">Central</option>
+										<option value="Parte alta"
+											th:selected="${regiao == 'Parte alta'}">Parte alta</option>
+										<option value="Parte baixa"
+											th:selected="${regiao == 'Parte baixa'}">Parte baixa</option>
+										<option value="Rural" th:selected="${regiao == 'Rural'}">Rural</option>
+									</select>
+									<p class="text-red" th:if="${#fields.hasErrors('regiao')}"
+										th:errors="*{regiao}"></p>
 								</div>
 							</div>
 
-							<div class="form-group">
-								<label class="col-sm-2 control-label">E-mail</label>
-								<div class="col-sm-4">
-									<input type="text" class="form-control" th:field="*{email}" />
-									<p class="text-red" th:if="${#fields.hasErrors('email')}"
-										th:errors="*{email}"></p>
-								</div>
-							</div>
-
-							<div class="form-group">
-								<label class="col-sm-2 control-label">Preposto</label>
-								<div class="col-sm-4">
-									<input type="text" class="form-control" id="preposto"
-										name="preposto" th:field="*{preposto}" />
-									<p class="text-red" th:if="${#fields.hasErrors('preposto')}"
-										th:errors="*{preposto}"></p>
-								</div>
-							</div>
 
 						</div>
 						<!-- Modal de confirmação -->
@@ -99,7 +83,7 @@
 									<div class="modal-footer">
 										<button type="button" class="btn btn-secondary"
 											data-dismiss="modal">Continuar com o cadastro</button>
-										<a th:href="@{/empresa/list}">
+										<a th:href="@{/bairro/list}">
 											<button type="button" class="btn btn-danger">Voltar
 												para a lista</button>
 										</a>

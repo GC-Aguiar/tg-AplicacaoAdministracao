@@ -25,21 +25,21 @@
 					</div>
 					<!-- /.box-header -->
 					<!-- form start -->
-					<form th:action="@{'/municipe/save/' + ${municipe.codigo}}" th:object="${municipe}"
+					<form th:action="@{/municipe/save/}" th:object="${municipe}"
 						method="post" class="form-horizontal">
 						<div class="box-body">
 							<div class="form-group">
-								<label class="col-sm-2 control-label">Código</label>
+								<label class="col-sm-3 control-label">Código</label>
 
-								<div class="col-sm-4">
+								<div class="col-sm-6">
 									<input type="text" class="form-control" readonly="readonly"
 										th:field="*{codigo}" placeholder="Código do Munícipe">
 								</div>
 							</div>
 							<!--  
 							<div class="form-group">
-								<label class="col-sm-2 control-label">Product Type:<span>*</span></label>
-								<div class="col-sm-4">
+								<label class="col-sm-3 control-label">Product Type:<span>*</span></label>
+								<div class="col-sm-6">
 									<select class="form-control" th:field="*{productTypeId}">
 										<option value="">Select...</option>
 										<option th:each="productType : ${productTypes}"
@@ -54,8 +54,8 @@
 							-->
 
 							<div class="form-group">
-								<label class="col-sm-2 control-label">Nome completo</label>
-								<div class="col-sm-4">
+								<label class="col-sm-3 control-label">Nome completo</label>
+								<div class="col-sm-6">
 									<input type="text" class="form-control" th:field="*{nome}" />
 									<p class="text-red" th:if="${#fields.hasErrors('nome')}"
 										th:errors="*{nome}"></p>
@@ -63,8 +63,8 @@
 							</div>
 
 							<div class="form-group">
-								<label class="col-sm-2 control-label">Nome social</label>
-								<div class="col-sm-4">
+								<label class="col-sm-3 control-label">Nome social</label>
+								<div class="col-sm-6">
 									<input type="text" class="form-control"
 										th:field="*{nomeSocial}" />
 									<p class="text-red" th:if="${#fields.hasErrors('nomeSocial')}"
@@ -74,8 +74,8 @@
 
 							<!-- Campo para o atributo "telefone" -->
 							<div class="form-group">
-								<label class="col-sm-2 control-label">Telefone</label>
-								<div class="col-sm-4">
+								<label class="col-sm-3 control-label">Telefone</label>
+								<div class="col-sm-6">
 									<input type="text" class="form-control" th:field="*{telefone}" />
 									<p class="text-red" th:if="${#fields.hasErrors('telefone')}"
 										th:errors="*{telefone}"></p>
@@ -85,8 +85,8 @@
 
 							<!-- Campo para o atributo "cpf" -->
 							<div class="form-group">
-								<label class="col-sm-2 control-label">CPF</label>
-								<div class="col-sm-4">
+								<label class="col-sm-3 control-label">CPF</label>
+								<div class="col-sm-6">
 									<input type="text" class="form-control" id="cpf" name="cpf"
 										th:field="*{cpf}" />
 									<p class="text-red" th:if="${#fields.hasErrors('cpf')}"
@@ -96,8 +96,8 @@
 
 							<!-- Campo para o atributo "nomeMae" -->
 							<div class="form-group">
-								<label class="col-sm-2 control-label">Nome da Mãe</label>
-								<div class="col-sm-4">
+								<label class="col-sm-3 control-label">Nome da Mãe</label>
+								<div class="col-sm-6">
 									<input type="text" class="form-control" th:field="*{nomeMae}" />
 									<p class="text-red" th:if="${#fields.hasErrors('nomeMae')}"
 										th:errors="*{nomeMae}"></p>
@@ -106,8 +106,8 @@
 
 							<!-- Campo para o atributo "dataNascimento" -->
 							<div class="form-group">
-								<label class="col-sm-2 control-label">Data de Nascimento</label>
-								<div class="col-sm-4">
+								<label class="col-sm-3 control-label">Data de Nascimento</label>
+								<div class="col-sm-6">
 									<input type="date" class="form-control"
 										th:field="*{dataNascimento}" />
 									<p class="text-red"
@@ -118,29 +118,19 @@
 
 							<!-- Campo para o atributo "sexo" -->
 							<div class="form-group">
-								<label class="col-sm-2 control-label">Sexo</label>
-								<div class="col-sm-4">
+								<label class="col-sm-3 control-label">Sexo</label>
+								<div class="col-sm-6">
 									<input type="text" class="form-control" th:field="*{sexo}" />
 									<p class="text-red" th:if="${#fields.hasErrors('sexo')}"
 										th:errors="*{sexo}"></p>
 								</div>
 							</div>
 
-							<!-- Campo para o atributo "codigoOcupacao" -->
-							<div class="form-group">
-								<label class="col-sm-2 control-label">Código da Ocupação</label>
-								<div class="col-sm-4">
-									<input type="text" class="form-control"
-										th:field="*{codigoOcupacao}" />
-									<p class="text-red"
-										th:if="${#fields.hasErrors('codigoOcupacao')}"
-										th:errors="*{codigoOcupacao}"></p>
-								</div>
-							</div>
+
 							<!-- Campo para o atributo "tipoLogradouro" -->
 							<div class="form-group">
-								<label class="col-sm-2 control-label">Tipo de Logradouro</label>
-								<div class="col-sm-4">
+								<label class="col-sm-3 control-label">Tipo de Logradouro</label>
+								<div class="col-sm-6">
 									<input type="text" class="form-control"
 										th:field="*{tipoLogradouro}" />
 									<p class="text-red"
@@ -151,8 +141,8 @@
 
 							<!-- Campo para o atributo "logradouro" -->
 							<div class="form-group">
-								<label class="col-sm-2 control-label">Logradouro</label>
-								<div class="col-sm-4">
+								<label class="col-sm-3 control-label">Logradouro</label>
+								<div class="col-sm-6">
 									<input type="text" class="form-control"
 										th:field="*{logradouro}" />
 									<p class="text-red" th:if="${#fields.hasErrors('logradouro')}"
@@ -162,9 +152,9 @@
 
 							<!-- Campo para o atributo "numeroLogradouro" -->
 							<div class="form-group">
-								<label class="col-sm-2 control-label">Número do
+								<label class="col-sm-3 control-label">Número do
 									Logradouro</label>
-								<div class="col-sm-4">
+								<div class="col-sm-6">
 									<input type="text" class="form-control"
 										th:field="*{numeroLogradouro}" />
 									<p class="text-red"
@@ -175,8 +165,8 @@
 
 							<!-- Campo para o atributo "complemento" -->
 							<div class="form-group">
-								<label class="col-sm-2 control-label">Complemento</label>
-								<div class="col-sm-4">
+								<label class="col-sm-3 control-label">Complemento</label>
+								<div class="col-sm-6">
 									<input type="text" class="form-control"
 										th:field="*{complemento}" />
 									<p class="text-red" th:if="${#fields.hasErrors('complemento')}"
@@ -186,8 +176,8 @@
 
 							<!-- Campo para o atributo "codigoBairro" -->
 							<div class="form-group">
-								<label class="col-sm-2 control-label">Código do Bairro</label>
-								<div class="col-sm-4">
+								<label class="col-sm-3 control-label">Código do Bairro</label>
+								<div class="col-sm-6">
 									<input type="text" class="form-control"
 										th:field="*{codigoBairro}" />
 									<p class="text-red"
@@ -198,8 +188,8 @@
 
 							<!-- Campo para o atributo "cep" -->
 							<div class="form-group">
-								<label class="col-sm-2 control-label">CEP</label>
-								<div class="col-sm-4">
+								<label class="col-sm-3 control-label">CEP</label>
+								<div class="col-sm-6">
 									<input type="text" class="form-control" th:field="*{cep}" />
 									<p class="text-red" th:if="${#fields.hasErrors('cep')}"
 										th:errors="*{cep}"></p>
@@ -208,8 +198,8 @@
 
 							<!-- Campo para o atributo "codigoCidade" -->
 							<div class="form-group">
-								<label class="col-sm-2 control-label">Código da Cidade</label>
-								<div class="col-sm-4">
+								<label class="col-sm-3 control-label">Código da Cidade</label>
+								<div class="col-sm-6">
 									<input type="text" class="form-control"
 										th:field="*{codigoCidade}" />
 									<p class="text-red"
@@ -217,11 +207,23 @@
 										th:errors="*{codigoCidade}"></p>
 								</div>
 							</div>
+							
+														<!-- Campo para o atributo "codigoOcupacao" -->
+							<div class="form-group">
+								<label class="col-sm-3 control-label">Código da Ocupação</label>
+								<div class="col-sm-6">
+									<input type="text" class="form-control"
+										th:field="*{codigoOcupacao}" />
+									<p class="text-red"
+										th:if="${#fields.hasErrors('codigoOcupacao')}"
+										th:errors="*{codigoOcupacao}"></p>
+								</div>
+							</div>
 
 							<!-- Campo para o atributo "anoObito" -->
 							<div class="form-group">
-								<label class="col-sm-2 control-label">Ano do Óbito</label>
-								<div class="col-sm-4">
+								<label class="col-sm-3 control-label">Ano do Óbito</label>
+								<div class="col-sm-6">
 									<input type="text" class="form-control" th:field="*{anoObito}" />
 									<p class="text-red" th:if="${#fields.hasErrors('anoObito')}"
 										th:errors="*{anoObito}"></p>
@@ -230,8 +232,8 @@
 
 							<!-- Campo para o atributo "nacionalidade" -->
 							<div class="form-group">
-								<label class="col-sm-2 control-label">Nacionalidade</label>
-								<div class="col-sm-4">
+								<label class="col-sm-3 control-label">Nacionalidade</label>
+								<div class="col-sm-6">
 									<input type="text" class="form-control"
 										th:field="*{nacionalidade}" />
 									<p class="text-red"
@@ -242,9 +244,9 @@
 
 							<!-- Campo para o atributo "cidadeNascimento" -->
 							<div class="form-group">
-								<label class="col-sm-2 control-label">Cidade de
+								<label class="col-sm-3 control-label">Cidade de
 									Nascimento</label>
-								<div class="col-sm-4">
+								<div class="col-sm-6">
 									<input type="text" class="form-control"
 										th:field="*{cidadeNascimento}" />
 									<p class="text-red"
@@ -255,9 +257,9 @@
 
 							<!-- Campo para o atributo "solicitaExclusao" -->
 							<div class="form-group">
-								<label class="col-sm-2 control-label">Solicitação de
+								<label class="col-sm-3 control-label">Solicitação de
 									Exclusão</label>
-								<div class="col-sm-4">
+								<div class="col-sm-6">
 									<input type="checkbox" class="form-control"
 										th:field="*{solicitaExclusao}" />
 									<p class="text-red"
@@ -269,10 +271,32 @@
 
 
 						</div>
+							  <!-- Modal de confirmação -->
+  <div class="modal fade" id="modalConfirmacao" tabindex="-1" role="dialog" aria-labelledby="modalConfirmacaoLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalConfirmacaoLabel">Confirmação</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Tem certeza que deseja cancelar o cadastro?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Voltar</button>
+          <a th:href="@{/municipe/list}">
+          	<button type="button" class="btn btn-primary">Confirmar</button>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
 						<!-- /.box-body -->
 						<div class="box-footercenter" style="display: flex; justify-content: center;">
-							<a th:href="@{/product/list}">
-								<button type="button" class="btn btn-default btn-space">
+							<a>
+								<button type="button" class="btn btn-default btn-space" data-toggle="modal" data-target="#modalConfirmacao">
 									<i class="fa fa-right"></i> Cancelar
 								</button>
 							</a>
@@ -287,6 +311,8 @@
 			</div>
 		</div>
 	</div>
+	
+
 
 	<th:block layout:fragment="script">
 	<script src="/dist/js/pages/sidbm_custom.js"></script>
